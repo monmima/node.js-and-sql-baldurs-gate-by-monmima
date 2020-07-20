@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EJS 3</title>
+
+    <link href="https://fonts.googleapis.com/css?family=MedievalSharp&display=swap" rel="stylesheet"> 
+    <style>
+
+
+        body {
+            counter-reset: q;
+            transition: all 0.5s ease;
+        }
+        div {
+            min-height: 150px;
+            width: 150px;
+        }
+        figcaption {
+            align-items: center;
+            background-image: linear-gradient(to bottom, white, gray, white);
+            border-bottom-left-radius: 25px;
+            border-bottom-right-radius: 25px;
+            display: flex;
+            min-height: 50px;
+            justify-content: center;
+            text-align: center;
+            width: 150px;
+        }
+        figure {
+            background-image: linear-gradient(to bottom, black, white);
+            border-bottom-left-radius: 25px;
+            border-bottom-right-radius: 25px;
+            border-top-left-radius: 25px;
+            border-top-right-radius: 25px;
+            min-height: 150px;
+            margin: 10px;
+            width: 150px;
+        }
+        footer {
+            font-weight: bold;
+            margin-top: 50px;
+            text-align: center;
+        }
+        footer, h1 {
+            text-align: center;
+        }
+        h1 {
+            font-family: 'MedievalSharp', 'Open Sans', sans-serif;
+            font-size: 1.5em;
+        }
+        h2 {
+            display: none;
+        }
+        img {
+            height: auto;
+            max-width: 100%; /*taille maximale de l'image*/
+            width: 100%;
+        }
+        main {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+            grid-template-rows: auto auto;
+            justify-items: center;
+        }
+        q {
+            padding: 15px;
+        }
+
+        /*PSEUDO-CLASSES*/
+        a:link, a:visited, a:active {
+            color: black;
+            text-decoration: none;
+        }
+        a:focus, a:hover {
+            text-decoration: underline;
+        }
+
+        /*https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Lists_and_Counters/Using_CSS_counters*/
+        q::before {
+            counter-increment: q;
+            content: "Saison " counter(q) "\00a0: «\00a0";
+        }
+        q::after {
+            content: "\00a0»"
+        }
+        /*MEDIA QUERIES*/
+        @media screen and (max-width: 759px) {
+            body
+            {
+                font-size: 0.8em;         
+            }
+            /*PLUS DE COLONNES GRID ICI, QUE DU FLEX*/
+            main {
+                display: flex;
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+        @media screen and (min-width: 760px) and (max-width: 960px) {
+            body
+            {
+                font-size: 1em;
+            }
+            div, figure, figcaption {
+                width: 150px;
+            }
+        }
+        @media screen and (min-width: 961px) and (max-width: 1100px) {
+            body
+            {
+                font-size: 1.2em;
+            }
+            div, figure, figcaption {
+                width: 200px;
+            }
+        }
+        @media screen and (min-width: 1100px) {
+            body
+            {
+                font-size: 1.3em;
+            }
+            div, figure, figcaption {
+                width: 250px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <%- include("header") %>
+
+    <main>
+        <% for (let i of member) { %>
+            <section>
+                <figure>
+                    <div><img src="<%= i.image_mb %>" alt="Portrait of <%= i.first_name_mb %>"></div>
+                    <figcaption>
+                        <a href="/character-info/<%= i.id_mb %>" title="More information on <%= i.first_name_mb %>"><%= i.first_name_mb %></a>
+                    </figcaption>
+                </figure>
+            </section>
+        <% } %>
+    </main>
+    
+    <%- include("footer") %>
+    <script src="js/random-message.js"></script>
+</body>
+</html>
+
+

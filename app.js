@@ -47,7 +47,7 @@ app.use(express.static(path.resolve(__dirname, 'public')));
 // read/select posts
 app.get("/get-characters", (req, res) => {
 
-    let sql = "SELECT * FROM membres_tb";
+    let sql = "SELECT * FROM membres_tb ORDER BY first_name_mb";
     let query = db.query(sql, (err, myRes) => {
         if (err) {
             res.status(200).send("Are you sure you have created a table?");
@@ -64,34 +64,29 @@ app.get("/get-characters", (req, res) => {
     });
 });
 
+// // select single post
+// app.get("/character-info/:id", (req, res) => {
+//     let sql = `SELECT * FROM membres_tb WHERE id_mb = ${req.params.id}`;
+//     let query = db.query(sql, (err, myRes) => {
+//         if (err) {
+//             throw err;
+//         } else {
+//             res.status(200).render("character-info", {
+//                 { member: myRes }
+//             });
+//             console.log(member);
+//         }
+//     });
+// });
+
 // select single post
-app.get("/get-post/:id", (req, res) => {
-    let sql = `SELECT * FROM posts_tb WHERE id = ${req.params.id}` ;
+app.get("/character-info/:id", (req, res) => {
+    let sql = `SELECT * FROM membres_tb WHERE id_mb = ${req.params.id}` ;
     let query = db.query(sql, (err, myRes) => {
         if (err) {
             throw err;
         } else {
             res.status(200).json(myRes);
-        }
-    });
-});
-
-
-/**
- * EJS template 1
- * https://www.w3schools.com/nodejs/shownodejs_cmd.asp?filename=demo_mongodb_query
- */
-app.get('/ejs-1', (req, res) => {
-    let sql = "SELECT * FROM posts_tb";
-
-    db.query(sql, (err, myRes) => {
-        if (err) {
-            throw err;
-        } else {
-            console.log(myRes);
-
-            res.status(200).render("ejs-3", { post : myRes });
-
         }
     });
 });
@@ -102,7 +97,7 @@ app.get('/ejs-1', (req, res) => {
  */
 app.get('/ejs-2', (req, res) => {
     res.status(200).render("ejs-2", {
-        node : {
+        node: {
             dirname: __dirname,
             filename: __filename
         }
@@ -113,8 +108,8 @@ app.get('/ejs-2', (req, res) => {
  * EJS template 3
  * https://www.w3schools.com/nodejs/shownodejs_cmd.asp?filename=demo_mongodb_query
  */
-app.get('/ejs-3', (req, res) => {
-    let sql = "SELECT * FROM posts_tb";
+app.get('/portraits', (req, res) => {
+    let sql = "SELECT * FROM membres_tb ORDER BY first_name_mb";
 
     db.query(sql, (err, myRes) => {
         if (err) {
@@ -122,7 +117,7 @@ app.get('/ejs-3', (req, res) => {
         } else {
             console.log(myRes);
 
-            res.status(200).render("ejs-3", { post : myRes });
+            res.status(200).render("portraits", { member: myRes });
 
         }
     });
