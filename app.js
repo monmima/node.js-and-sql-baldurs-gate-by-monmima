@@ -54,7 +54,7 @@ app.get("/get-characters", (req, res) => {
             throw err;
 
         } else {
-            console.log(myRes);
+            // console.log(myRes);
             // res.status(200).send(myRes);
 
             res.status(200).json(myRes);
@@ -64,21 +64,6 @@ app.get("/get-characters", (req, res) => {
     });
 });
 
-// // select single post
-// app.get("/character-info/:id", (req, res) => {
-//     let sql = `SELECT * FROM membres_tb WHERE id_mb = ${req.params.id}`;
-//     let query = db.query(sql, (err, myRes) => {
-//         if (err) {
-//             throw err;
-//         } else {
-//             res.status(200).render("character-info", {
-//                 { member: myRes }
-//             });
-//             console.log(member);
-//         }
-//     });
-// });
-
 // select single post
 app.get("/character-info/:id", (req, res) => {
     let sql = `SELECT * FROM membres_tb WHERE id_mb = ${req.params.id}` ;
@@ -86,7 +71,9 @@ app.get("/character-info/:id", (req, res) => {
         if (err) {
             throw err;
         } else {
-            res.status(200).json(myRes);
+            // res.status(200).json(myRes);
+            res.status(200).render("character-info", { member: myRes });
+            console.log(myRes);
         }
     });
 });
@@ -115,7 +102,7 @@ app.get('/portraits', (req, res) => {
         if (err) {
             throw err;
         } else {
-            console.log(myRes);
+            // console.log(myRes);
 
             res.status(200).render("portraits", { member: myRes });
 

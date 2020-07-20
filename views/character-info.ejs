@@ -59,10 +59,9 @@
             width: 100%;
         }
         main {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr 1fr;
-            grid-template-rows: auto auto;
+            display: flex;
             justify-items: center;
+            justify-content: center;
         }
         q {
             padding: 15px;
@@ -132,15 +131,16 @@
     <%- include("header") %>
 
     <main>
-
+        <% for (let i of member) { %>
             <section>
                 <figure>
+                    <div><img src="<%= i.image_mb %>" alt="Portrait of <%= i.first_name_mb %>"></div>
                     <figcaption>
-                        <%= member.first_name_mb %>
+                        <%= i.first_name_mb %>
                     </figcaption>
                 </figure>
             </section>
-
+        <% } %>
     </main>
     
     <%- include("footer") %>
