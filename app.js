@@ -44,10 +44,12 @@ app.set("view engine", "ejs");
  */
 app.use(express.static(path.resolve(__dirname, 'public')));
 
-// read/select all
+/**
+ * See all characters as JSON
+ */
 app.get("/get-characters", (req, res) => {
 
-    let sql = "SELECT * FROM characters_tb ORDER BY first_name_ch";
+    let sql = "SELECT * FROM characters_tb INNER JOIN areas_tb ON characters_tb.area_ch = areas_tb.id_area WHERE id_ch";
     let query = db.query(sql, (err, myRes) => {
         if (err) {
             res.status(200).send("Are you sure you have created a table?");
@@ -64,7 +66,9 @@ app.get("/get-characters", (req, res) => {
     });
 });
 
-// select single item
+/**
+ * See single character
+ */
 app.get("/character-info/:id", (req, res) => {
 
     let sql = `SELECT * FROM characters_tb INNER JOIN areas_tb ON characters_tb.area_ch = areas_tb.id_area WHERE id_ch = ${req.params.id}`;
@@ -81,23 +85,9 @@ app.get("/character-info/:id", (req, res) => {
 });
 
 /**
- * EJS template 2
- * https://www.w3schools.com/nodejs/shownodejs_cmd.asp?filename=demo_mongodb_query
+ * See all portraits (EJS)
  */
-app.get('/ejs-2', (req, res) => {
-    res.status(200).render("ejs-2", {
-        node: {
-            dirname: __dirname,
-            filename: __filename
-        }
-    });
-});
-
-/**
- * EJS template 3
- * https://www.w3schools.com/nodejs/shownodejs_cmd.asp?filename=demo_mongodb_query
- */
-app.get('/portraits', (req, res) => {
+app.get('/', (req, res) => {
     let sql = "SELECT * FROM characters_tb ORDER BY first_name_ch";
 
     db.query(sql, (err, myRes) => {
@@ -106,7 +96,7 @@ app.get('/portraits', (req, res) => {
         } else {
             // console.log(myRes);
 
-            res.status(200).render("portraits", { member: myRes });
+            res.status(200).render("index.ejs", { member: myRes });
 
         }
     });
