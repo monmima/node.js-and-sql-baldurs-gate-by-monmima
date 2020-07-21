@@ -44,7 +44,7 @@ app.set("view engine", "ejs");
  */
 app.use(express.static(path.resolve(__dirname, 'public')));
 
-// read/select posts
+// read/select all
 app.get("/get-characters", (req, res) => {
 
     let sql = "SELECT * FROM membres_tb ORDER BY first_name_mb";
@@ -64,9 +64,11 @@ app.get("/get-characters", (req, res) => {
     });
 });
 
-// select single post
+// select single item
 app.get("/character-info/:id", (req, res) => {
-    let sql = `SELECT * FROM membres_tb WHERE id_mb = ${req.params.id}` ;
+
+    let sql = `SELECT * FROM pays_tb INNER JOIN membres_tb ON membres_tb.country_mb = pays_tb.id_area WHERE id_mb = ${req.params.id}`;
+
     let query = db.query(sql, (err, myRes) => {
         if (err) {
             throw err;
