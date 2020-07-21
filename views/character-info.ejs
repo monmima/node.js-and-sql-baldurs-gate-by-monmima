@@ -8,6 +8,9 @@
     <link href="https://fonts.googleapis.com/css?family=MedievalSharp&display=swap" rel="stylesheet"> 
     <style>
         aside {
+            margin: 5px;
+
+            /* flex */
             display: flex;
             align-items: center;
             justify-content: center;
@@ -141,18 +144,19 @@
             <section>
 
                 <figure>
-                    <div><img src="<%= i.image_mb %>" alt="Portrait of <%= i.first_name_mb %>"></div>
+                    <div><img src="<%= i.image_ch %>" alt="Portrait of <%= i.first_name_ch %>"></div>
                     <figcaption>
-                        <%= i.first_name_mb %>
+                        <!-- the next line displays the family name of the character if there is one at all in the database -->
+                        <%= i.first_name_ch %> <%= i.family_name_ch %>
                     </figcaption>
                 </figure>
 
             </section>
 
             <aside>
-                <p><%= i.class_mb %></p>
-                <p><%= i.alignment_mb %></p>
-                <p><%= i.location_mb %></p>
+                <p><%= i.class_ch %></p>
+                <p><%= i.alignment_ch %></p>
+                <p><%= i.name_area %> (<%= i.id_area %>)</p>
             </aside>
         <% } %>
     </main>

@@ -47,7 +47,7 @@ app.use(express.static(path.resolve(__dirname, 'public')));
 // read/select all
 app.get("/get-characters", (req, res) => {
 
-    let sql = "SELECT * FROM membres_tb ORDER BY first_name_mb";
+    let sql = "SELECT * FROM characters_tb ORDER BY first_name_ch";
     let query = db.query(sql, (err, myRes) => {
         if (err) {
             res.status(200).send("Are you sure you have created a table?");
@@ -67,7 +67,7 @@ app.get("/get-characters", (req, res) => {
 // select single item
 app.get("/character-info/:id", (req, res) => {
 
-    let sql = `SELECT * FROM pays_tb INNER JOIN membres_tb ON membres_tb.country_mb = pays_tb.id_area WHERE id_mb = ${req.params.id}`;
+    let sql = `SELECT * FROM characters_tb INNER JOIN areas_tb ON characters_tb.area_ch = areas_tb.id_area WHERE id_ch = ${req.params.id}`;
 
     let query = db.query(sql, (err, myRes) => {
         if (err) {
@@ -98,7 +98,7 @@ app.get('/ejs-2', (req, res) => {
  * https://www.w3schools.com/nodejs/shownodejs_cmd.asp?filename=demo_mongodb_query
  */
 app.get('/portraits', (req, res) => {
-    let sql = "SELECT * FROM membres_tb ORDER BY first_name_mb";
+    let sql = "SELECT * FROM characters_tb ORDER BY first_name_ch";
 
     db.query(sql, (err, myRes) => {
         if (err) {

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jul 20, 2020 at 09:57 PM
+-- Generation Time: Jul 21, 2020 at 09:59 PM
 -- Server version: 10.4.13-MariaDB
 -- PHP Version: 7.2.31
 
@@ -24,89 +24,86 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `membres_tb`
+-- Table structure for table `areas_tb`
 --
 
-CREATE TABLE `membres_tb` (
-  `id_mb` int(11) NOT NULL,
-  `name_mb` varchar(30) NOT NULL,
-  `first_name_mb` varchar(25) NOT NULL,
-  `image_mb` varchar(140) NOT NULL,
-  `country_mb` char(3) NOT NULL,
-  `privilege_mb` tinyint(1) NOT NULL,
-  `gender_mb` varchar(11) NOT NULL,
-  `subscription_date_mb` date NOT NULL,
-  `date_updated` timestamp NOT NULL DEFAULT current_timestamp(),
-  `alignment_mb` varchar(20) NOT NULL,
-  `class_mb` varchar(30) NOT NULL,
-  `location_mb` varchar(50) NOT NULL
+CREATE TABLE `areas_tb` (
+  `id_area` char(10) NOT NULL DEFAULT '',
+  `name_area` varchar(100) NOT NULL DEFAULT ''
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `membres_tb`
+-- Dumping data for table `areas_tb`
 --
 
-INSERT INTO `membres_tb` (`id_mb`, `name_mb`, `first_name_mb`, `image_mb`, `country_mb`, `privilege_mb`, `gender_mb`, `subscription_date_mb`, `date_updated`, `alignment_mb`, `class_mb`, `location_mb`) VALUES
-(1, '', 'Imoen', 'https://vignette.wikia.nocookie.net/baldursgategame/images/6/64/Imoen_IMOEN_Portrait_BG1.png', 'FR', 0, 'f', '2019-10-22', '2019-10-24 17:48:48', 'neutre-bon', 'voleur', 'côte de Château-Suif'),
-(2, '', 'Montaron', 'https://vignette.wikia.nocookie.net/baldursgategame/images/7/75/Montaron_MONTAR_Portrait_BG1.png', 'FR', 0, 'm', '2019-10-22', '2019-10-24 17:48:48', 'neutre-mauvais', 'guerrier-voleur', 'côte de Château-Suif'),
-(3, '', 'Jaheira', 'https://vignette.wikia.nocookie.net/baldursgategame/images/7/7e/Jaheira_JAHEIRA_Portrait_BG1.png', 'FR', 0, 'f', '2019-10-22', '2019-10-24 17:48:48', 'neutre absolu', 'guerrier-druide', 'The Friendly Arm'),
-(4, '', 'Khalid', 'https://vignette.wikia.nocookie.net/baldursgategame/images/9/90/Khalid_KHALID_Portrait_BG1.png', 'FR', 0, 'm', '2019-10-22', '2019-10-24 17:48:48', 'neutre-bon', 'guerrier', 'The Friendly Arm'),
-(5, 'DeVir', 'Viconia', 'https://vignette.wikia.nocookie.net/baldursgategame/images/d/d5/Viconia_DeVir_VICONIA_Portrait_BG1.png', 'FR', 0, 'f', '2019-10-24', '2019-10-24 17:48:48', 'neutre-mauvais', 'clerc', 'Peldvale'),
-(6, 'Ilvastarr', 'Ajantis', 'https://vignette.wikia.nocookie.net/baldursgategame/images/7/7c/Ajantis_Ilvastarr_AJANTIS_Portrait_BG1.png', 'FR', 0, 'm', '2019-10-24', '2019-10-24 17:48:48', 'loyal-bon', 'paladin', 'Area North of the Friendly Arm Inn'),
-(7, '', 'Coran', 'https://vignette.wikia.nocookie.net/baldursgategame/images/6/62/Coran_CORAN_Portrait_BG1.png', 'FR', 0, 'm', '2019-10-24', '2019-10-24 17:48:48', 'chaotique-bon', 'guerrier-voleur', 'Bois-Manteau'),
-(8, '', 'Safana', 'https://vignette.wikia.nocookie.net/baldursgategame/images/0/04/Safana_SAFANA_Portrait_BG1.png', 'FR', 0, 'f', '2019-10-24', '2019-10-24 17:48:48', 'chaotique-bon', 'voleur', 'phare');
+INSERT INTO `areas_tb` (`id_area`, `name_area`) VALUES
+('AR1200', 'First Cloakwood'),
+('AR1400', 'Fishing Village'),
+('AR2301', 'Friendly Arm Inn'),
+('AR2400', 'Peldvale'),
+('AR2700', 'Candlekeep Coastway'),
+('AR3600', 'Lighthouse'),
+('USA', 'Friendly Arm Inn');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pays_tb`
+-- Table structure for table `characters_tb`
 --
 
-CREATE TABLE `pays_tb` (
-  `CODE_pays` char(3) NOT NULL DEFAULT '',
-  `nom_pays` varchar(100) NOT NULL DEFAULT '',
-  `langues_pays` varchar(50) NOT NULL
+CREATE TABLE `characters_tb` (
+  `id_ch` int(11) NOT NULL,
+  `family_name_ch` varchar(30) NOT NULL,
+  `first_name_ch` varchar(25) NOT NULL,
+  `image_ch` varchar(140) NOT NULL,
+  `privilege_ch` tinyint(1) NOT NULL,
+  `subscription_date_ch` date NOT NULL,
+  `date_updated_ch` timestamp NOT NULL DEFAULT current_timestamp(),
+  `alignment_ch` varchar(20) NOT NULL,
+  `class_ch` varchar(30) NOT NULL,
+  `area_ch` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `pays_tb`
+-- Dumping data for table `characters_tb`
 --
 
-INSERT INTO `pays_tb` (`CODE_pays`, `nom_pays`, `langues_pays`) VALUES
-('CAN', 'Canada', 'French, English'),
-('CHN', 'China', 'Chinese'),
-('ESP', 'Spain', 'Spanish'),
-('FR', 'Forgotten Realms', 'Common'),
-('POL', 'Poland', 'Polish'),
-('RUS', 'Russia', 'Russian'),
-('USA', 'United States', 'English');
+INSERT INTO `characters_tb` (`id_ch`, `family_name_ch`, `first_name_ch`, `image_ch`, `privilege_ch`, `subscription_date_ch`, `date_updated_ch`, `alignment_ch`, `class_ch`, `area_ch`) VALUES
+(1, '', 'Imoen', 'https://vignette.wikia.nocookie.net/baldursgategame/images/6/64/Imoen_IMOEN_Portrait_BG1.png', 0, '2019-10-22', '2019-10-24 17:48:48', 'neutral good', 'thief', 'AR2700'),
+(2, '', 'Montaron', 'https://vignette.wikia.nocookie.net/baldursgategame/images/7/75/Montaron_MONTAR_Portrait_BG1.png', 0, '2019-10-22', '2019-10-24 17:48:48', 'neutral evil', 'fighter / thief', 'AR2700'),
+(3, '', 'Jaheira', 'https://vignette.wikia.nocookie.net/baldursgategame/images/7/7e/Jaheira_JAHEIRA_Portrait_BG1.png', 0, '2019-10-22', '2019-10-24 17:48:48', 'true neutral', 'fighter / druid', 'AR2301'),
+(4, '', 'Khalid', 'https://vignette.wikia.nocookie.net/baldursgategame/images/9/90/Khalid_KHALID_Portrait_BG1.png', 0, '2019-10-22', '2019-10-24 17:48:48', 'neutral good', 'fighter', 'AR2301'),
+(5, 'DeVir', 'Viconia', 'https://vignette.wikia.nocookie.net/baldursgategame/images/d/d5/Viconia_DeVir_VICONIA_Portrait_BG1.png', 0, '2019-10-24', '2019-10-24 17:48:48', 'neutral evil', 'cleric', 'AR2400'),
+(6, 'Ilvastarr', 'Ajantis', 'https://vignette.wikia.nocookie.net/baldursgategame/images/7/7c/Ajantis_Ilvastarr_AJANTIS_Portrait_BG1.png', 0, '2019-10-24', '2019-10-24 17:48:48', 'loyal good', 'paladin', 'AR1400'),
+(7, '', 'Coran', 'https://vignette.wikia.nocookie.net/baldursgategame/images/6/62/Coran_CORAN_Portrait_BG1.png', 0, '2019-10-24', '2019-10-24 17:48:48', 'chaotic good', 'fighter / thief', 'AR1200'),
+(8, '', 'Safana', 'https://vignette.wikia.nocookie.net/baldursgategame/images/0/04/Safana_SAFANA_Portrait_BG1.png', 0, '2019-10-24', '2019-10-24 17:48:48', 'chaotic good', 'thief', 'AR3600');
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `membres_tb`
+-- Indexes for table `areas_tb`
 --
-ALTER TABLE `membres_tb`
-  ADD UNIQUE KEY `ID_membre` (`id_mb`);
+ALTER TABLE `areas_tb`
+  ADD PRIMARY KEY (`id_area`),
+  ADD UNIQUE KEY `id_area` (`id_area`) USING BTREE;
 
 --
--- Indexes for table `pays_tb`
+-- Indexes for table `characters_tb`
 --
-ALTER TABLE `pays_tb`
-  ADD PRIMARY KEY (`CODE_pays`),
-  ADD UNIQUE KEY `CODE_pays` (`CODE_pays`);
+ALTER TABLE `characters_tb`
+  ADD UNIQUE KEY `id_mb` (`id_ch`) USING BTREE;
 
 --
 -- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT for table `membres_tb`
+-- AUTO_INCREMENT for table `characters_tb`
 --
-ALTER TABLE `membres_tb`
-  MODIFY `id_mb` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+ALTER TABLE `characters_tb`
+  MODIFY `id_ch` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
